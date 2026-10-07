@@ -1,0 +1,88 @@
+Relatório de pacote
+
+-----------------------------------------------------------------------------
+Documento:
+Nome: Novo Logo Alquimikamente beta.ai
+Modo de cor: Cor CMYK
+Cores: #0f4e90 - #8e1e76 - #2ca037
+Perfil de cor: Coated FOGRA39 (ISO 12647-2:2004)
+Unidades da régua: milímetros
+Dimensões da prancheta: 297 mm x 210 mm
+Mostrar imagens no modo de contorno: DESATIVADO
+Realçar fontes substituídas: DESATIVADO
+Realçar glifos substituídos: DESATIVADO
+Preservar capacidade de edição do texto
+Simular papel colorido: DESATIVADO
+
+-----------------------------------------------------------------------------
+Objetos de cor especial:
+Carvalho.cor1 (CMYK)
+Carvalho.cor2 (CMYK)
+Carvalho.cor3 (CMYK)
+Carvalho.cor4 (CMYK)
+Cuneiforme.cor1 (CMYK)
+Cuneiforme.cor2 (CMYK)
+Cuneiforme.cor3 (CMYK)
+Cuneiforme.cor4 (CMYK)
+ExplosãoDeEstrelas.cor1 (CMYK)
+ExplosãoDeEstrelas.cor2 (CMYK)
+FilmGray.color1 (CMYK)
+FilmGray.color2 (CMYK)
+Geométrica1.4.cor2 (CMYK)
+Hand.color1 (CMYK)
+Hand.color2 (CMYK)
+LinhaDupla1.3.cor2 (CMYK)
+LinhaDupla1.4.cor1 (CMYK)
+LinhaDupla1.4.cor2 (CMYK)
+Listrado.cor1 (CMYK)
+Listrado.cor2 (CMYK)
+Listrado.cor3 (CMYK)
+Listrado.cor4 (CMYK)
+Listrado.cor5 (CMYK)
+Pinheiro.cor1 (CMYK)
+Pinheiro.cor10 (CMYK)
+Pinheiro.cor11 (CMYK)
+Pinheiro.cor12 (CMYK)
+Pinheiro.cor2 (CMYK)
+Pinheiro.cor3 (CMYK)
+Pinheiro.cor4 (CMYK)
+Pinheiro.cor5 (CMYK)
+Pinheiro.cor6 (CMYK)
+Pinheiro.cor7 (CMYK)
+Pinheiro.cor8 (CMYK)
+Pinheiro.cor9 (CMYK)
+Roteado.cor1 (CMYK)
+Roteado.cor2 (CMYK)
+TracejarCírculo1.1.cor1 (CMYK)
+Vitoriano.cor1 (CMYK)
+Vitoriano.cor2 (CMYK)
+Vitral.cor1 (CMYK)
+Vitral.cor2 (CMYK)
+Vitral.cor3 (CMYK)
+Vitral.cor4 (CMYK)
+Vitral.cor5 (CMYK)
+Vitral.cor6 (CMYK)
+Vitral.cor7 (CMYK)
+Vitral.cor8 (CMYK)
+
+-----------------------------------------------------------------------------
+Fontes ausentes:NENHUM
+
+-----------------------------------------------------------------------------
+Fontes protegidas que não foram empacotadas:NENHUM
+
+-----------------------------------------------------------------------------
+Fontes:
+Orbitron Medium (TrueType)
+
+-----------------------------------------------------------------------------
+Fontes incorporadas:
+NENHUM
+
+-----------------------------------------------------------------------------
+Vínculos ausentes:
+NENHUM
+
+-----------------------------------------------------------------------------
+Imagens vinculadas:
+NENHUM

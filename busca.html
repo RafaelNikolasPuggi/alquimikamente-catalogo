@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscar perfume | Alquimikamente</title>
+<meta name="description" content="Busque entre as fragrâncias Alquimikamente por nome, marca, família olfativa, gênero ou linha.">
+<link rel="icon" href="img/icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="index.html" aria-label="Alquimikamente, início"><img src="img/logo.png" alt="Alquimikamente" width="160" height="45"></a>
+    <button class="hamb" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html#categorias">Categorias</a></li>
+      <li><a href="index.html#intensidades">Intensidades</a></li>
+      <li><a href="index.html#familias">Famílias</a></li>
+      <li><a href="index.html#femininas">Femininas</a></li>
+      <li><a href="index.html#compartilhaveis">Compartilháveis</a></li>
+      <li><a href="index.html#masculinas">Masculinas</a></li>
+      <li><a href="index.html#valores">Valores</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+      <li><a class="busca-link ativo" href="busca.html" aria-current="page">Buscar perfume</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="busca-topo">
+    <div class="kicker">Encontre a sua fragrância</div>
+    <h2>Buscar <em>perfume</em></h2>
+    <p class="lead">Digite o nome do perfume, a marca ou uma família olfativa (como "baunilha" ou "cítrico"). Clique em um perfume para ver os detalhes e os valores.</p>
+    <label class="campo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="q" type="search" placeholder="Ex.: La Vie Est Belle, Dior, Gourmand…" autocomplete="off" aria-label="Buscar perfume">
+    </label>
+    <div class="filtros" role="group" aria-label="Filtros">
+      <button class="chip" type="button" data-grupo="genero" data-valor="Feminino" aria-pressed="false">Femininos</button>
+      <button class="chip" type="button" data-grupo="genero" data-valor="Compartilhável" aria-pressed="false">Compartilháveis</button>
+      <button class="chip" type="button" data-grupo="genero" data-valor="Masculino" aria-pressed="false">Masculinos</button>
+      <span class="sep"></span>
+      <button class="chip" type="button" data-grupo="linha" data-valor="Premium" aria-pressed="false">Premium</button>
+      <button class="chip" type="button" data-grupo="linha" data-valor="Super Premium" aria-pressed="false">Super Premium</button>
+      <button class="chip" type="button" data-grupo="linha" data-valor="Luxo" aria-pressed="false">Luxo</button>
+      <span class="sep"></span>
+      <select id="familia" aria-label="Família olfativa"><option value="">Todas as famílias</option></select>
+      <button class="chip" id="limpar" type="button">Limpar</button>
+    </div>
+  </div>
+  <p class="contagem" id="contagem" aria-live="polite"></p>
+  <div class="grade" id="resultados"></div>
+  <p class="vazio" id="vazio" hidden>Nenhum perfume encontrado. Tente outro nome, ou <a href="https://wa.me/5531996031507?text=Ol%C3%A1!%20N%C3%A3o%20achei%20um%20perfume%20no%20cat%C3%A1logo%2C%20pode%20me%20ajudar%3F" target="_blank" rel="noopener">pergunte pelo WhatsApp</a>.</p>
+</main>
+
+<footer class="rodape" style="margin-top:60px"><img src="img/logo.png" alt="Alquimikamente" width="107" height="30">Fragrâncias inspiradas nos perfumes citados. Não possuímos vínculo com as marcas mencionadas. Imagens meramente ilustrativas.</footer>
+
+<script src="assets/dados.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

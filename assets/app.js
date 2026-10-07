@@ -21,6 +21,8 @@
   };
   const ALIAS = { "Ambarado": "Oriental", "Ambar": "Oriental" };
   const CONC = { "EDP": "20%", "Perfume": "30%", "Elixir": "40%", "Body Splash": "5%" };
+  const BSI = "Body Splash Inspiração";
+  const rot = l => l === BSI ? "Inspiração" : l;
 
   const sem = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -41,7 +43,7 @@
   /* ---------- card ---------- */
   const card = p => `<button class="perf" data-id="${p.id}" type="button" aria-label="Ver detalhes de ${esc(p.nome)}">
       <span class="hx"><i>${p.img ? `<img src="${p.img}" alt="" loading="lazy" width="62" height="68">` : ""}</i></span>
-      <b>${esc(p.nome)}</b><span class="tag ${classe(p.linha)}">${p.linha}</span>
+      <b>${esc(p.nome)}</b><span class="tag ${classe(p.linha)}">${rot(p.linha)}</span>
       <span class="m">${esc(p.marca)}</span><span class="f">${esc(p.familia)}</span></button>`;
 
   /* ---------- ficha (modal) ---------- */
@@ -56,7 +58,7 @@
     const perf = ["EDP", "Perfume", "Elixir"].filter(x => t[x]);
     const linhaHtml = (tipo, cols) => `<tr><td>${tipo} <small>(${CONC[tipo]})</small></td>${cols.map(c => `<td>${t[tipo][c] ? real(t[tipo][c]) : "—"}</td>`).join("")}</tr>`;
     const tamP = tam.filter(x => perf.some(tp => t[tp][x]));
-    let h = `<table><tr><th>${linha}</th>${tamP.map(x => `<th>${x} ml</th>`).join("")}</tr>${perf.map(tp => linhaHtml(tp, tamP)).join("")}</table>`;
+    let h = perf.length ? `<table><tr><th>${linha}</th>${tamP.map(x => `<th>${x} ml</th>`).join("")}</tr>${perf.map(tp => linhaHtml(tp, tamP)).join("")}</table>` : "";
     if (t["Body Splash"]) {
       const tb = Object.keys(t["Body Splash"]).sort((a, b) => a - b);
       h += `<table><tr><th>Body Splash</th>${tb.map(x => `<th>${x} ml</th>`).join("")}</tr>${linhaHtml("Body Splash", tb)}</table>`;
@@ -73,15 +75,15 @@
       <div class="modal">
         <div class="img">${p.img ? `<img src="${p.img}" alt="${esc(p.nome)}">` : ""}</div>
         <div class="info">
-          <span class="tag ${classe(p.linha)}">${p.linha}</span>
+          <span class="tag ${classe(p.linha)}">${rot(p.linha)}</span>
           <h3>${esc(p.nome)}</h3>
-          <p class="insp">Inspirado em ${esc(p.nome)} · ${esc(p.marca)}</p>
+          <p class="insp">${/cria[çc][ãa]o exclusiva/i.test(p.marca) ? "Criação exclusiva Alquimikamente" : `Inspirado em ${esc(p.nome)} · ${esc(p.marca)}`}</p>
           <dl><dt>Gênero</dt><dd>${p.genero}</dd><dt>Família</dt><dd>${esc(p.familia)}</dd><dt>Linha</dt><dd>${p.linha}</dd></dl>
           ${bases.length ? `<div class="desc-fam">${bases.map(b => `<p><b>${b}:</b> ${FAMILIAS[b][0]} <i>Ideal: ${FAMILIAS[b][1]}.</i></p>`).join("")}</div>` : ""}
           <h4 class="kicker" style="margin-top:18px">Valores da linha ${p.linha}</h4>
           ${tabelaPrecos(p.linha)}
           <a class="btn whats" href="https://wa.me/${WHATS}?text=${msg}" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
-          <p class="aviso">Fragrância inspirada no perfume citado. Não possuímos vínculo com as marcas mencionadas. Imagem meramente ilustrativa.</p>
+          <p class="aviso">${/cria[çc][ãa]o exclusiva/i.test(p.marca) ? "Imagem meramente ilustrativa." : "Fragrância inspirada no perfume citado. Não possuímos vínculo com as marcas mencionadas. Imagem meramente ilustrativa."}</p>
         </div>
       </div>`;
     dlg.querySelector(".fechar").addEventListener("click", () => dlg.close());
@@ -96,7 +98,7 @@
   /* ---------- página inicial ---------- */
   const PASSO = 24;
   document.querySelectorAll("[data-vitrine]").forEach(sec => {
-    const lista = perfumes.filter(p => p.genero === sec.dataset.vitrine);
+    const lista = perfumes.filter(p => sec.dataset.vitrine === BSI ? p.linha === BSI : p.genero === sec.dataset.vitrine && p.linha !== BSI);
     const grade = sec.querySelector(".grade"), botao = sec.querySelector(".mais button");
     let n = 0;
     const mostrar = () => {
@@ -112,7 +114,7 @@
   const fams = document.getElementById("lista-familias");
   if (fams) fams.innerHTML = Object.entries(FAMILIAS).map(([n, [t, i]]) => `<div class="fam"><b>${n}</b><p>${t}</p><span>Ideal: ${i}</span></div>`).join("");
   const vals = document.getElementById("lista-valores");
-  if (vals) vals.innerHTML = Object.keys(precos).map(l => `<div class="valor"><span class="tag ${classe(l)}">${l}</span>${tabelaPrecos(l).replace(/<th>(Premium|Super Premium|Luxo)<\/th>/, "<th></th>")}</div>`).join("");
+  if (vals) vals.innerHTML = Object.keys(precos).map(l => `<div class="valor"><span class="tag ${classe(l)}">${rot(l)}</span>${tabelaPrecos(l).replace(/<th>(Premium|Super Premium|Luxo)<\/th>/, "<th></th>")}</div>`).join("");
   const tot = document.getElementById("total-geral");
   if (tot) tot.textContent = perfumes.length;
 

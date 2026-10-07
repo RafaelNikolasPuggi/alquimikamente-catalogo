@@ -1,7 +1,7 @@
 :root{
   --areia:#F3ECE2; --areia-2:#EBE1D3; --linho:#E2D3BF; --branco:#FFFDF9;
   --cafe:#4A3B30; --cafe-2:#6E5B4B; --caramelo:#A9784A; --roxo:#8E1E76;
-  --premium:#1D1B19; --super:#0F4E90; --luxo:#E3B53B; --whats:#25603B;
+  --premium:#1D1B19; --super:#0F4E90; --luxo:#E3B53B; --inspira:#2E8B45; --whats:#25603B;
   --raio:14px; --sombra:0 10px 30px rgba(74,59,48,.12);
   --serif:'Playfair Display',Georgia,serif; --sans:Montserrat,system-ui,sans-serif;
 }
@@ -18,7 +18,8 @@ h2 em,h1 em,h3 em{font-style:italic;font-weight:400}
 .lead{color:var(--cafe-2);max-width:640px}
 section{padding:72px 0}
 .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;padding:3px 10px;color:#fff;white-space:nowrap}
-.t-premium{background:var(--premium)} .t-super-premium{background:var(--super)} .t-luxo{background:var(--luxo);color:#3a2d12}
+.t-premium{background:var(--premium)} .t-super-premium{background:var(--super)} .t-luxo{background:var(--luxo);color:#3a2d12} .t-body-splash-inspiracao{background:var(--inspira)}
+.card-cat .pct.pct-s{font-size:22px}
 .btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:12px 22px;border-radius:30px;background:var(--cafe);color:#fff;text-decoration:none;transition:transform .15s,opacity .15s}
 .btn:hover{transform:translateY(-1px);opacity:.92}
 .btn.claro{background:var(--branco);color:var(--cafe);border:1px solid var(--linho)}

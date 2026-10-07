@@ -36,28 +36,45 @@ def marca(m):
 # ---------- perfumes ----------
 ws = openpyxl.load_workbook(BASE + "/Fragrâncias Alquimikamente - FINAL.xlsx")["Fragrâncias"]
 rows = [r[:5] for r in ws.iter_rows(min_row=2, values_only=True) if r[0]]
-PASTAS = {"FEMININO": "FEMININO", "COMPARTILHÁVEL": "COMPARTILHÁVEL", "MASCULINO": "MASCULINOS"}
+PASTAS = {"FEMININO": "FEMININO", "COMPARTILHÁVEL": "COMPARTILHÁVEL", "MASCULINO": "MASCULINOS", "INSPIRAÇÃO": "body splash inspiração"}
 GEN = {"FEMININO": "Feminino", "COMPARTILHÁVEL": "Compartilhável", "MASCULINO": "Masculino"}
+BSI = "Body Splash Inspiração"
+APELIDO_FOTO = {"BIG BOSS": "HUGO BOSS BOTTLED", "BEBE NATURE": "MAMAE E BB"}
+RECORTE = {"BABY JOHN": (0.30, 0.0, 0.75, 1.0)}  # tira o selo vermelho da loja que veio na foto
+
+
+def clareia(img):
+    """Fundo cinza-claro liso vira branco (fotos de loja com fundo #EEE)."""
+    w, h = img.size
+    ref = max((img.getpixel(q) for q in ((2, 2), (w - 3, 2), (2, h - 3), (w - 3, h - 3))), key=sum)
+    if min(ref) < 205 or min(ref) >= 250:
+        return img
+    dif = ImageChops.difference(img, Image.new("RGB", img.size, ref)).convert("L").point(lambda v: 255 if v < 14 else 0)
+    return Image.composite(Image.new("RGB", img.size, (255, 255, 255)), img, dif)
 perfumes, faltando, usados = [], [], set()
 for gen, pasta in PASTAS.items():
     fotos = {}
     for f in os.listdir(f"{BASE}/fotos/{pasta}"):
         k = norm(os.path.splitext(f)[0])
         fotos[k[:-2] if k[-2:] in (" F", " M", " C") else k] = f
-    for n, g, c, m, fa in sorted(r for r in rows if r[1] == gen):
+    sel = [r for r in rows if (r[2] == BSI) == (gen == "INSPIRAÇÃO") and (gen == "INSPIRAÇÃO" or r[1] == gen)]
+    for n, g, c, m, fa in sorted(sel, key=lambda r: norm(r[0])):
         k = norm(n)
-        f = fotos.get(k)
+        f = fotos.get(k) or fotos.get(APELIDO_FOTO.get(k, "-"))
         if not f:
             alt = difflib.get_close_matches(k, list(fotos), 1, 0.85)
             f = fotos[alt[0]] if alt else next((v for kk, v in fotos.items() if kk.startswith(k + " ") or k.startswith(kk + " ")), None)
         sid = slug(n)
         if sid in usados:
-            sid += "-" + slug(GEN[gen])
+            sid += "-" + slug(GEN.get(g, g))
         usados.add(sid)
         img = ""
         if f:
             im = Image.open(f"{BASE}/fotos/{pasta}/{f}").convert("RGBA")
-            flat = Image.alpha_composite(Image.new("RGBA", im.size, (255, 255, 255, 255)), im).convert("RGB")
+            flat = clareia(Image.alpha_composite(Image.new("RGBA", im.size, (255, 255, 255, 255)), im).convert("RGB"))
+            if k in RECORTE:
+                x0, y0, x1, y1 = RECORTE[k]
+                flat = flat.crop((int(x0 * flat.width), int(y0 * flat.height), int(x1 * flat.width), int(y1 * flat.height)))
             diff = ImageChops.difference(flat, Image.new("RGB", flat.size, (255, 255, 255))).convert("L").point(lambda p: 255 if p > 18 else 0)
             flat = flat.crop(diff.getbbox() or (0, 0, *flat.size))
             flat.thumbnail((480, 480))
@@ -65,7 +82,8 @@ for gen, pasta in PASTAS.items():
             flat.save(f"{SITE}/{img}", quality=82)
         else:
             faltando.append(n)
-        perfumes.append(dict(id=sid, nome=n, genero=GEN[gen], linha=str(c).strip().title(), marca=marca(m), familia=fa or "", img=img))
+        linha = BSI if str(c).strip() == BSI else str(c).strip().title()
+        perfumes.append(dict(id=sid, nome=n, genero=GEN.get(g, g), linha=linha, marca=marca(m), familia=fa or "", img=img))
 
 # ---------- preços (coluna "Preço praticado") ----------
 wp = openpyxl.load_workbook(BASE + "/Precificação Alquimikamente.xlsx", data_only=True)["4. Tabela de Preços"]

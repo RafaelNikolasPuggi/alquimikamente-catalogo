@@ -2,6 +2,7 @@
 import json, os, re, shutil, unicodedata, difflib
 import openpyxl
 from PIL import Image, ImageChops
+from datetime import date
 
 BASE = r"C:/Users/krazm/OneDrive/Área de Trabalho/Catálogo Alquimikamente"
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -106,7 +107,7 @@ icone = Image.open(BASE + "/Logo Alquimikamente/Logo Alquimikamente - ícone.png
 icone.thumbnail((256, 256))
 icone.save(f"{SITE}/img/icone.png", optimize=True)
 
-dados = dict(perfumes=perfumes, precos=precos, atualizado="06/10/2026")
+dados = dict(perfumes=perfumes, precos=precos, atualizado=date.today().strftime("%d/%m/%Y"))
 with open(f"{SITE}/assets/dados.js", "w", encoding="utf-8") as fh:
     fh.write("// Gerado automaticamente a partir das planilhas. Não editar à mão.\nwindow.ALQ = ")
     json.dump(dados, fh, ensure_ascii=False, separators=(",", ":"))
